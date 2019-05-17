@@ -8,6 +8,7 @@ var nested = require('postcss-nested');
 var cssImport = require('postcss-import');
 var mixins = require('postcss-mixins');
 var hexrgba = require('postcss-hexrgba');
+var webpack = require('webpack');
 
 gulp.task('watch', function(){
     browserSync.init({
@@ -25,6 +26,13 @@ gulp.task('watch', function(){
         styles();
         cssInject();
     });
+
+    watch('./app/assets/scripts/**/*.js', function() {
+        scripts();
+        scriptsRefresh();
+    });
+
+
 });
 
 gulp.task('cssInject', cssInject);
@@ -43,3 +51,22 @@ function styles(done) {
     })
     .pipe(gulp.dest('./app/temp/styles'));
 };
+
+//scripts
+gulp.task('scripts', scripts);
+function scripts(){
+    webpack(require('../../webpack.config.js'), function(err, stats){
+        if (err) {
+            console.log(err.toString());
+        }
+        console.log("\n" + stats.toString() + "\n");
+    });
+};
+
+gulp.task('scriptsRefresh', scriptsRefresh);
+function scriptsRefresh(){
+    browserSync.reload();
+};
+
+    
+
