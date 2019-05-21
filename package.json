@@ -21,7 +21,8 @@
   "homepage": "https://github.com/monkeydelaney/travel-site#readme",
   "dependencies": {
     "jquery": "^3.4.1",
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "waypoints": "^4.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
